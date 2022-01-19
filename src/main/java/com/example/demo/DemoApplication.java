@@ -2,9 +2,7 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -16,9 +14,9 @@ public class DemoApplication {
     @GetMapping("/ok/{text}")
     String ok(@PathVariable String text){
 
-        String values = text + "\n";
+        StringBuilder values = new StringBuilder(text + "\n");
         for (String item : text.split("s")){
-            values += parseVariable(item).toString();
+            values.append(parseVariable(item).toString());
         }
 
         return "to coordds :  " + values ;
@@ -38,9 +36,17 @@ public class DemoApplication {
 
     }
 
+    @PostMapping("/posttest")
+    public String postThing(@RequestBody Coordinate coordinate){
+        return coordinate.toString() + ". tush ceissi fam";
+
+    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
+
+
 
 }
