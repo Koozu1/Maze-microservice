@@ -43,6 +43,7 @@ public class DemoApplication {
 
     @PostMapping("/posttest")
     public ArrayList<Location> postThing(@RequestBody KoozuPair<Location, Location> locations){
+
         return mazeGenerator.calculateMazeLocs(locations.getKey(), locations.getValue());
 
     }
