@@ -1,5 +1,7 @@
 package com.example.demo.MazeGenerator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,15 +9,13 @@ public class Generator {
     Random rand = new Random();
     Utils utils = new Utils();
 
+
     public ArrayList<Location> calculateMazeLocs(final Location first, final Location second) {
 
         ArrayList<Location> locList = new ArrayList<>();
-        int lastPercent = 0;
 
-        final Location start = first.clone();
+        final Location start = first;
         final Location finish;
-
-
         finish = utils.devideLocation(start.clone(), second);
 
 
@@ -23,11 +23,9 @@ public class Generator {
         ArrayList<Location> whereWasI = new ArrayList<>();
         ArrayList<Location> visitedLocs = new ArrayList<>();
         ArrayList<KoozuPair<Location, Location>> points = new ArrayList<>();
-        int surfaceArea = (int) (Math.abs(start.getX() - finish.getX()) * Math.abs(start.getZ() - finish.getZ()));
+        int surfaceArea = (Math.abs(start.getBlockX() - finish.getBlockX()) * Math.abs(start.getBlockZ() - finish.getBlockZ()));
 
         while (true) {
-            lastPercent = notifyPercent(locList.size(), surfaceArea, lastPercent);
-
             ArrayList<Location> possibleLocs = utils.getPossibleBlocksAround(iAmHere, start, finish, visitedLocs);
             if (possibleLocs.isEmpty()) {
                 if (whereWasI.size() <= 1) {
@@ -59,10 +57,4 @@ public class Generator {
         return locList;
     }
 
-    public int notifyPercent(int currentArea , int surfacearea, int lastPercent){
-        if (currentArea / surfacearea > lastPercent){
-            System.out.println(((int) currentArea / surfacearea * 100) + "% Done!");
-        }
-        return currentArea / surfacearea;
-    }
 }
