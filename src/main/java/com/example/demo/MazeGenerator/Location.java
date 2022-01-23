@@ -1,37 +1,37 @@
 package com.example.demo.MazeGenerator;
 
 public class Location implements Cloneable{
-    private double x;
-    private double y;
-    private double z;
+    private int x;
+    private int y;
+    private int z;
 
-    public Location(final double x, final double y, final double z) {
+    public Location(final int x, final int y, final int z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public double getX() {
+    public int getX() {
         return this.x;
     }
 
-    public void setX(double x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public double getY() {
+    public int getY() {
         return this.y;
     }
 
-    public void setY(double y) {
+    public void setY(int y) {
         this.y = y;
     }
 
-    public double getZ() {
+    public int getZ() {
         return this.z;
     }
 
-    public void setZ(double z) {
+    public void setZ(int z) {
         this.z = z;
     }
 
@@ -43,7 +43,7 @@ public class Location implements Cloneable{
             throw new Error(e);
         }
     }
-    public Location add(double x, double y, double z) {
+    public Location add(int x, int y, int z) {
         this.x += x;
         this.y += y;
         this.z += z;
@@ -54,20 +54,6 @@ public class Location implements Cloneable{
         this.y -= y;
         this.z -= z;
         return this;
-    }
-    public int getBlockX() {
-        return locToBlock(this.x);
-    }
-    public int getBlockY() {
-        return locToBlock(this.y);
-    }
-    public int getBlockZ() {
-        return locToBlock(this.z);
-    }
-
-    public static int locToBlock(double loc) {
-        final int floor = (int) loc;
-        return floor == loc ? floor : floor - (int) (Double.doubleToRawLongBits(loc) >>> 63);
     }
 
     @Override
@@ -80,13 +66,13 @@ public class Location implements Cloneable{
         }
         final Location other = (Location) obj;
 
-        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
+        if (this.x != other.x) {
             return false;
         }
-        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
+        if (this.y != other.y) {
             return false;
         }
-        if (Double.doubleToLongBits(this.z) != Double.doubleToLongBits(other.z)) {
+        if (this.z != other.z) {
             return false;
         }
         return true;

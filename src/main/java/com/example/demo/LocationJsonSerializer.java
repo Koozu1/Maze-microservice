@@ -16,8 +16,8 @@ public class LocationJsonSerializer extends JsonSerializer<Location> {
     public void serialize(Location location, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
             throws IOException, JsonProcessingException {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("x", String.valueOf(location.getBlockX()));
-        jsonGenerator.writeStringField("z", String.valueOf(location.getBlockZ()));
+        jsonGenerator.writeStringField("x", String.valueOf(location.getX()));
+        jsonGenerator.writeStringField("z", String.valueOf(location.getZ()));
         jsonGenerator.writeEndObject();
 
     }

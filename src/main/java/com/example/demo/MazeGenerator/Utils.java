@@ -6,13 +6,13 @@ import java.util.Arrays;
 public class Utils {
 
     //Check if loc is in the 2d square of corner 1 & 2
-    public boolean isInRegion(Location location, Location corner1, Location corner2) {
+    public boolean isInRegionnnn(Location location, Location corner1, Location corner2) {
         int doubleCheck = 0;
 
-        if (location.getBlockX() >= corner1.getBlockX() && location.getBlockX() <= corner2.getBlockX()) {
+        if (location.getX() >= corner1.getX() && location.getX() <= corner2.getX()) {
             doubleCheck += 1;
         }
-        if (location.getBlockZ() >= corner1.getBlockZ() && location.getBlockZ() <= corner2.getBlockZ()) {
+        if (location.getZ() >= corner1.getZ() && location.getZ() <= corner2.getZ()) {
             doubleCheck += 1;
         }
 
@@ -22,9 +22,19 @@ public class Utils {
         return false;
     }
 
+    public boolean isInRegion(Location location, Location corner1, Location corner2){
+        if (location.getX() < corner1.getX() || location.getX() > corner2.getX()){
+            return false;
+        }
+        if (location.getZ() < corner1.getZ() || location.getZ() > corner2.getZ()){
+            return false;
+        }
+        return true;
+    }
+
     //Devides pos2 to 1/4 of original surface area
     public Location devideLocation(final Location pos1, final Location pos2) {
-        return pos1.clone().add((pos2.getBlockX() - pos1.getBlockX()) / 2, 0, (pos2.getBlockZ() - pos1.getBlockZ()) / 2);
+        return pos1.clone().add((pos2.getX() - pos1.getX()) / 2, 0, (pos2.getZ() - pos1.getZ()) / 2);
     }
 
     //Checks if location is visited

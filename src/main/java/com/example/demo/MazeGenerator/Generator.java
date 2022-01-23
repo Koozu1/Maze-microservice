@@ -1,7 +1,5 @@
 package com.example.demo.MazeGenerator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,24 +7,22 @@ public class Generator {
     Random rand = new Random();
     Utils utils = new Utils();
 
-
     public ArrayList<Location> calculateMazeLocs(final Location first, final Location second) {
 
         ArrayList<Location> locList = new ArrayList<>();
 
-        final Location start = first;
         final Location finish;
-        finish = utils.devideLocation(start.clone(), second);
+        finish = utils.devideLocation(first, second);
 
 
-        Location iAmHere = start.clone();
+        Location iAmHere = first.clone();
         ArrayList<Location> whereWasI = new ArrayList<>();
         ArrayList<Location> visitedLocs = new ArrayList<>();
         ArrayList<KoozuPair<Location, Location>> points = new ArrayList<>();
-        int surfaceArea = (Math.abs(start.getBlockX() - finish.getBlockX()) * Math.abs(start.getBlockZ() - finish.getBlockZ()));
+        int surfaceArea = (Math.abs(first.getX() - finish.getX()) * Math.abs(first.getZ() - finish.getZ()));
 
         while (true) {
-            ArrayList<Location> possibleLocs = utils.getPossibleBlocksAround(iAmHere, start, finish, visitedLocs);
+            ArrayList<Location> possibleLocs = utils.getPossibleBlocksAround(iAmHere, first, finish, visitedLocs);
             if (possibleLocs.isEmpty()) {
                 if (whereWasI.size() <= 1) {
                     break;
@@ -48,13 +44,11 @@ public class Generator {
 
             if (surfaceArea == visitedLocs.size()) {
                 points.forEach(p -> {
-                    locList.addAll(utils.multiplyLocations(p.getKey(), p.getValue(), start));
+                    locList.addAll(utils.multiplyLocations(p.getKey(), p.getValue(), first));
                 });
                 return locList;
             }
         }
-
         return locList;
     }
-
 }
